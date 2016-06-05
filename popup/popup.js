@@ -1,6 +1,6 @@
 function init() {
     document.getElementById('listen').addEventListener('click', listen, false);
-    console.log('attached listen click event');
+    document.getElementById('listenbg').addEventListener('click', listenbg, false);
 
     chrome.runtime.onMessage.addListener(msglistener);
 }
@@ -9,10 +9,11 @@ function msglistener(e) {
     console.log('incoming to POPUP, e:', e, arguments);
 }
 
+function listenbg() {
+    chrome.runtime.sendMessage('listen');
+}
 function listen() {
     console.log('in listen POPUP');
-    chrome.runtime.sendMessage('hi');
-    return;
 	window.navigator.mediaDevices.getUserMedia({
 		audio: true
 	}).then(function (stream) {
